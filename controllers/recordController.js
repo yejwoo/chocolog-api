@@ -19,6 +19,7 @@ const updateRecord = async (req, res) => {
   }
 };
 
+
 module.exports = {
   getRecord,
   updateRecord,

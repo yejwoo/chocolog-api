@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routers
 const indexRouter = require("./routes/index");
 const recordRouter = require("./routes/record");
+const uploadRouter = require("./routes/upload");
 const apiRouter = express.Router();
 
 // Attach existing routers to the base router
@@ -33,6 +34,7 @@ const apiRouter = express.Router();
 // app.use("/record", recordRouter);
 apiRouter.use("/", indexRouter); 
 apiRouter.use("/record", recordRouter);
+apiRouter.use("/upload", uploadRouter);
 
 app.use("/api", apiRouter);
 
