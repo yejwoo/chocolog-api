@@ -3,8 +3,8 @@ const multer = require("multer");
 const multerS3 = require("multer-s3");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const { fromIni } = require("@aws-sdk/credential-provider-ini");
-
 const router = express.Router();
+const crypto = require("crypto");
 
 const s3Client = new S3Client({
   credentials: fromIni({ profile: "default" }),
@@ -20,7 +20,11 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      cb(null, "upload/" + Date.now().toString() + "-" + file.originalname);
+      const uuid = crypto.randomUUID(); // 여기에서 uuid 생성
+      const now = new Date();
+      const datePath = `${now.getFullYear()}${(now.getMonth() + 1).toString().padStart(2, '0')}${now.getDate().toString().padStart(2, '0')}`; 
+      
+      cb(null, `${datePath}/${uuid}-${file.originalname}`); 
     },
   }),
 });
