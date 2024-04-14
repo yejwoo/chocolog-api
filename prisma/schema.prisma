@@ -13,8 +13,8 @@ model cc_users {
   user_name     String   @db.VarChar(50)
   user_email    String   @db.VarChar(255) @unique
   user_pw       String   @default("") @db.VarChar(72)
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  updated_at    DateTime @default(now()) @db.Timestamp(0)
+  created_at    DateTime @default(dbgenerated("NOW()")) @db.Timestamp(0)
+  updated_at    DateTime @default(dbgenerated("NOW()")) @db.Timestamp(0)
   refresh_token String   @db.VarChar(256)
   is_expired    Boolean
 }
@@ -29,8 +29,8 @@ model cc_logs {
   choco_desc    String   @default("") @db.VarChar(72)
   ratings       Int      @default(0) @db.Int // 0.5점 단위로 0 ~ 5점만 적용시키는 법
   image_url     String   @default("") @db.VarChar(255)
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  updated_at    DateTime @default(now()) @db.Timestamp(0)
+  created_at    DateTime @default(dbgenerated("NOW()")) @db.Timestamp(0)
+  updated_at    DateTime @default(dbgenerated("NOW()")) @db.Timestamp(0)
 }
 
 
