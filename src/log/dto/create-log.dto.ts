@@ -14,6 +14,7 @@ export class CreateLogDTO {
   product_type: string;
 
   @IsString()
+  @IsOptional()
   choco_type: string;
 
   @IsString()
@@ -22,8 +23,9 @@ export class CreateLogDTO {
 
   @IsInt()
   @Min(0)
-  @Max(10)
-  ratings: number;
+  @Max(5)
+  @IsOptional()
+  ratings?: number;
 
   @IsString()
   @IsOptional()
