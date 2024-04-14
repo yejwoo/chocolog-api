@@ -5,6 +5,7 @@ import { LogController } from './log/log.controller';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { LogModule } from './log/log.module';
+import { S3Service } from './s3/s3.service';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { LogModule } from './log/log.module';
     LogModule,
   ],
   controllers: [AppController, LogController],
-  providers: [LogService],
+  providers: [LogService, S3Service],
 })
 export class AppModule {}
 
