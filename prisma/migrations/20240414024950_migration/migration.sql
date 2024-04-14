@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `cc_logs` MODIFY `created_at` TIMESTAMP(0) NOT NULL DEFAULT NOW(),
+    MODIFY `updated_at` TIMESTAMP(0) NOT NULL DEFAULT NOW();

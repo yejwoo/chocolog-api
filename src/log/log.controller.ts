@@ -1,6 +1,17 @@
-import { Controller, Get, Post, Patch, Delete, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { LogService } from './log.service';
 import { CreateLogDTO } from 'src/log/dto/create-log.dto';
+import { UpdateLogDTO } from './dto/update-log.dto';
+import { Log } from './entities/log.entity';
 
 @Controller('log')
 export class LogController {
@@ -9,25 +20,30 @@ export class LogController {
 
   @Get()
   getLogs() {
-    return 'This is logs';
+    return this.logService.getLogs();
   }
 
-  getLog() {
-    return 'This is a log';
+  @Get('/:id')
+  async getLog(@Param('id') lid: number): Promise<Log> {
+    const log = await this.logService.getLog(lid);
+    if (!log) {
+      throw new NotFoundException(`Log with ID ${lid} not found`);
+    }
+    return log;
   }
 
   @Post()
-  createLog(@Body() logData: CreateLogDTO) {
+  async createLog(@Body() logData: CreateLogDTO) {
     return this.logService.createLog(logData); // 인스턴스를 통한 메서드 호출
   }
 
-  @Patch()
-  updateLog() {
-    return 'Log updated';
+  @Patch('/:id')
+  updateLog(@Param('id') lid: number, @Body() logData: UpdateLogDTO) {
+    return this.logService.updateLog(lid, logData);
   }
 
-  @Delete()
-  deleteLog() {
-    return 'Log deleted';
+  @Delete('/:id')
+  deleteLog(@Param('id') lid: number) {
+    return this.logService.deleteLog(lid);
   }
 }
