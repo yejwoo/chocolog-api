@@ -10,12 +10,4 @@ export class CreateUserDto {
 
   @IsString()
   user_pw: string;
-
-  @IsOptional()
-  @IsString()
-  refresh_token?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  is_expired?: boolean = false;
 }
