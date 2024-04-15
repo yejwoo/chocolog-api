@@ -7,6 +7,9 @@ import { LogModule } from './log/log.module';
 import { S3Service } from './s3/s3.service';
 import { S3Module } from './s3/s3.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
   imports: [
@@ -16,9 +19,10 @@ import { UserModule } from './user/user.module';
     LogModule,
     S3Module,
     UserModule,
+    AuthModule,
   ],
-  controllers: [AppController, LogController],
-  providers: [LogService, S3Service],
+  controllers: [AppController, LogController, AuthController],
+  providers: [LogService, S3Service, AuthService],
 })
 export class AppModule {}
 

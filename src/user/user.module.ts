@@ -4,6 +4,7 @@ import { UserController } from './user.controller';
 
 @Module({
   providers: [UserService],
-  controllers: [UserController]
+  controllers: [UserController],
+  exports: [UserService], // AuthService에서 주입받도록
 })
 export class UserModule {}
